@@ -10,11 +10,13 @@ export class UsersService {
   constructor(@InjectRepository(User) private userRepo: Repository<User>) {}
 
   async createUser(createUserDto: CreateUserDto): Promise<User> {
-    const { walletAddress } = createUserDto;
-    console.log('wallet', walletAddress);
+    const { walletAddress, type } = createUserDto;
+    console.log('wallet & type', walletAddress, type);
     try {
-      const user = this.userRepo.create();
-      user.walletAddress = walletAddress;
+      const user = this.userRepo.create({
+        walletAddress: walletAddress,
+        type: type,
+      });
       return await this.userRepo.save(user);
     } catch (error) {
       throw new BadRequestException(`Fail to create user error:${error}`);
@@ -22,8 +24,18 @@ export class UsersService {
   }
 
   async getUsers(): Promise<User[]> {
-    const users = await this.userRepo.find();
-    return users;
+    return await this.userRepo.find();
+  }
+
+  async cheackUserByAddress(address: string) {
+    const userFound = await this.userRepo
+      .createQueryBuilder('user')
+      .where(`user.wallet_address = :address`, { address })
+      .getOne();
+    if (userFound) {
+      return true;
+    }
+    return false;
   }
 
   getUserById(id: number) {

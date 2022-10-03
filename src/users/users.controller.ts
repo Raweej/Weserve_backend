@@ -16,13 +16,18 @@ import { User } from './entities/user.entity';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
+  @Post('/createUser')
   async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
     return await this.usersService.createUser(createUserDto);
   }
   @Get()
   getUsers(): Promise<User[]> {
     return this.usersService.getUsers();
+  }
+
+  @Get(':address')
+  cheackUserByAddress(@Param('address') address: string) {
+    return this.usersService.cheackUserByAddress(address);
   }
 
   @Get(':id')

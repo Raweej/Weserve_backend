@@ -1,7 +1,8 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 import { User } from 'src/users/entities/user.entity';
 
 export class CreateOrderDto {
+  @IsString()
   @IsNotEmpty()
-  user_id: User;
+  walletAddress: string;
 }

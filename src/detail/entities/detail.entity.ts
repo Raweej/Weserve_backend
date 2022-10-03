@@ -6,10 +6,10 @@ export class Detail {
   id: number;
 
   @Column({ name: 'initAmount' })
-  initAmount: string;
+  initAmount: number;
 
   @Column({ name: 'finalAmount' })
-  finalAmount: string;
+  finalAmount: number;
 
   @Column({ name: 'Tx_hash' })
   tx: string;
