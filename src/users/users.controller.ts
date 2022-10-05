@@ -26,8 +26,8 @@ export class UsersController {
   }
 
   @Get(':address')
-  cheackUserByAddress(@Param('address') address: string) {
-    return this.usersService.cheackUserByAddress(address);
+  async cheackUserByAddress(@Param('address') address: string) {
+    return await this.usersService.cheackUserByAddress(address);
   }
 
   @Get(':id')

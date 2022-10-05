@@ -19,7 +19,7 @@ export class Order {
   @JoinColumn({ name: 'user_id' })
   user_id: User;
 
-  @OneToOne(() => Detail)
+  @OneToOne(() => Detail, { eager: true })
   @JoinColumn({ name: 'detail_id' })
   detail: Detail;
 

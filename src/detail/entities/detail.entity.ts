@@ -5,10 +5,10 @@ export class Detail {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'initAmount' })
+  @Column({ type: 'decimal', name: 'initAmount', nullable: true })
   initAmount: number;
 
-  @Column({ name: 'finalAmount' })
+  @Column({ type: 'decimal', name: 'finalAmount', nullable: true })
   finalAmount: number;
 
   @Column({ name: 'Tx_hash' })
